@@ -11,10 +11,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: Development
-      - name: Fetch & Reset Release Branch
-        run: |
-          git fetch origin Release:Release
-          git reset --hard Release
+      #- name: Fetch & Reset Release Branch
+      #  run: |
+      #    git fetch origin Release:Release
+      #    git reset --hard Release
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
@@ -25,6 +25,6 @@ jobs:
           body: |
             Automated Pull Request
             To keep the Development branch up-to-date with the Release branch            
-          labels: automated
+          labels: automated pr
           assignees: ${{ github.actor }}
           reviewers: ${{ github.actor }}
