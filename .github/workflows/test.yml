@@ -1,0 +1,26 @@
+name: Test
+
+on:
+  workflow_dispatch:
+  
+jobs:
+  auto-pr:
+    name: Auto Pull Request
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Pull
+        run: git pull
+
+      - name: Auto Merge to Development
+        uses: peter-evans/create-pull-request@v4.2.0
+        with:
+          base: test
+          branch: master
+         # branch-suffix: timestamp
+          title: TJC - Auto Merge Release to Development
+          draft: true
+         # labels: Bug
+         # reviewers: TCarrol
