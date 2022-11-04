@@ -2,19 +2,22 @@ name: Create production promotion pull request
 on:
   push:
     branches:
-      - main
+      - Release
 jobs:
   productionPromotion:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: production
+          ref: Development
       - name: Reset promotion branch
         run: |
-          git fetch origin main:main
-          git reset --hard main
+          git fetch origin Release:Release
+          git reset --hard Release
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: production-promotion
+          branch: Release
+          branch-suffix: timestamp
+          title: Auto-Merge Release to Development
+          labels: automated
