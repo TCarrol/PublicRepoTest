@@ -18,6 +18,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           branch: Release
-          branch-suffix: timestamp
+          # branch-suffix: timestamp
           title: Auto-Merge Release to Development
           labels: automated
+          reviewrs: TCarrol
