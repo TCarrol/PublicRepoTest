@@ -1,26 +1,20 @@
-name: Test
-
+name: Create production promotion pull request
 on:
-  workflow_dispatch:
-  
+  push:
+    branches:
+      - main
 jobs:
-  auto-pr:
-    name: Auto Pull Request
-    runs-on: windows-latest
+  productionPromotion:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Pull
-        run: git pull
-
-      - name: Auto Merge to Development
-        uses: peter-evans/create-pull-request@v4.2.0
+      - uses: actions/checkout@v3
         with:
-          base: test
-          branch: master
-         # branch-suffix: timestamp
-          title: TJC - Auto Merge Release to Development
-          draft: true
-         # labels: Bug
-         # reviewers: TCarrol
+          ref: production
+      - name: Reset promotion branch
+        run: |
+          git fetch origin main:main
+          git reset --hard main
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: production-promotion
