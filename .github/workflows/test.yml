@@ -4,7 +4,7 @@ on:
     branches:
       - Release
 jobs:
-  productionPromotion:
+  auto-pr:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,4 +21,5 @@ jobs:
           # branch-suffix: timestamp
           title: Auto-Merge Release to Development
           labels: automated
+          assignees: ${{ github.actor }}
           reviewers: ${{ github.actor }}
