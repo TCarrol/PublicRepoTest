@@ -1,4 +1,4 @@
-name: Create production promotion pull request
+name: Create Pull Request (Release-to-Development)
 on:
   push:
     branches:
@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: Development
-      - name: Reset promotion branch
+      - name: Fetch & Reset Release Branch
         run: |
           git fetch origin Release:Release
           git reset --hard Release
@@ -21,4 +21,4 @@ jobs:
           # branch-suffix: timestamp
           title: Auto-Merge Release to Development
           labels: automated
-          reviewrs: TCarrol
+          reviewers: ${{ github.actor }}
