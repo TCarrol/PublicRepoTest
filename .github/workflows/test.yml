@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - Release
+
 jobs:
   auto-pr:
     runs-on: ubuntu-latest
@@ -17,9 +18,13 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
+          base: Development
           branch: Release
           # branch-suffix: timestamp
           title: Auto-Merge Release to Development
+          body: |
+            Automated Pull Request
+            To keep the Development branch up-to-date with the Release branch            
           labels: automated
           assignees: ${{ github.actor }}
           reviewers: ${{ github.actor }}
